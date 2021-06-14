@@ -24,6 +24,7 @@ var zpl = label.generateZPL();
 - [Installation](#installation)
 - Property Types
   - [Size](#size)
+  - [PrintQuantity](#printquantity)
   - [PrintDensity](#printdensity)
   - [FontFamily](#fontfamily)
   - [Alignment](#alignment)
@@ -54,6 +55,7 @@ In a browser:
 <script type="text/javascript">
   var label = new Label();
   label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+  label.quantity = new PrintQuantity(5,0,0,N);
   label.width = 100;
   label.height = 50;
   label.padding = new Spacing(10);
@@ -65,6 +67,7 @@ In a browser:
 
   var zpl = label.generateZPL();
   //^XA
+  //^PQ5,0,0,N
   //^FO10,10^AD,N,,
   //^FB780,1,0,L,0
   //^FDHello World!^FS
@@ -85,6 +88,7 @@ var jszpl = require('jszpl');
 
 var label = new jszpl.Label();
 label.printDensity = new jszpl.PrintDensity(jszpl.PrintDensityName['8dpmm']);
+label.quantity = new PrintQuantity(5,0,0,N);
 label.width = 100;
 label.height = 50;
 label.padding = new jszpl.Spacing(10);
@@ -96,6 +100,7 @@ text.text = 'Hello World!';
 
 var zpl = label.generateZPL();
 //^XA
+//^PQ5,0,0,N
 //^FO10,10^AD,N,,
 //^FB780,1,0,L,0
 //^FDHello World!^FS
@@ -158,6 +163,19 @@ Usage example:
 ```js
 var label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+```
+
+#### PrintQuantity
+
+PrintQuantity command gives control over several printing operations. It controls
+the number of labels to print, the number of labels printed before printer pauses, and the
+number of replications of each serial number.
+
+Usage example:
+
+```js
+var label = new Label();
+label.printQuantity = new PrintQuantity(5,0,0,N);
 ```
 
 #### FontFamily

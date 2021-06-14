@@ -248,6 +248,19 @@ class PrintDensity {
   }
 }
 
+class PrintQuantity {
+  constructor(quantity, pause, replicate, override) {
+    this.quantity = quantity || 1;
+    this.pause = pause || 0;
+    this.replicate = replicate || 0;
+    this.override = override || 'N';
+  }
+
+  toString() {
+    return '^PQ' + this.quantity + ',' + this.pause + ',' + this.replicate + ',' + this.override;
+  }
+}
+
 class GraphicData {
 
   constructor(width, height, data) {
@@ -463,15 +476,14 @@ class BaseContainerElement extends BaseVisualElement {
 class Label extends BaseContainerElement {
   constructor() {
     super();
-
     this.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
-
-    this.notImplemented = ['fixed', 'grid', 'margin', 'left', 'top']
+    this.notImplemented = ['fixed', 'grid', 'margin', 'left', 'top'];
   }
 
   generateZPL() {
     var zpl = '^XA';
-
+    zpl += '\n';
+    zpl += this.printQuantity;
     zpl += '\n';
 
     var width = this.getSize(this.width) * this.printDensity.value;
@@ -577,7 +589,7 @@ class Text extends BaseVisualElement {
     }
 
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
-    zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',' + this.fontFamily.height + ',' + this.fontFamily.width + '\n';
+    zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',' + Math.round(position.height) + ',' + Math.round(position.width) + '\n';
     zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
     zpl += '^FD' + this.text + '^FS\n';
 
@@ -1359,6 +1371,7 @@ module.exports = {
   SizeType: SizeType,
   Rotation: Rotation,
   PrintDensityName: PrintDensityName,
+  PrintQuantity: PrintQuantity,
   FontFamilyName: FontFamilyName,
   BarcodeTypeName: BarcodeTypeName,
   AlignmentValue: AlignmentValue,
