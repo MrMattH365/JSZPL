@@ -478,6 +478,8 @@ Text displays characters on the label.
 | left | [Size](#size) / Number | Sets the left offset of the element |
 | top | [Size](#size) / Number | Sets the top offset of the element |
 | text | String | Sets the text of the element |
+| maxLines | Number | Sets the maximum number of lines in the text block |
+| spaceBetweenLines | Number | If text block word wraps, this defines the space between each line (in dots) |
 
 Usage example:
 
@@ -486,10 +488,12 @@ var text = new Text();
 label.content.push(text);
 text.fontFamily = new FontFamily(FontFamilyName.D);
 text.text = 'Hello World!';
+text.maxLines = 2;
+text.spaceBetweenLines = 10;
 
 var zpl = label.generateZPL();
 //^XA
-//^FB780,1,0,L,0
+//^FB780,2,10,L,0
 //^FDHello World!^FS
 //^XZ
 ```

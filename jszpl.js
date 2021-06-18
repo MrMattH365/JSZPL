@@ -517,6 +517,8 @@ class Text extends BaseVisualElement {
 
     this.text = '';
     this.fontFamily = new FontFamily(FontFamilyName.A);
+    this.maxLines = 1;
+    this.spaceBetweenLines = 0;
 
     // this.rotation = Rotation.Normal;
     this.verticalAlignment = new Alignment(AlignmentValue.Start);
@@ -590,7 +592,7 @@ class Text extends BaseVisualElement {
 
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
     zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',' + Math.round(position.height) + ',' + Math.round(position.width) + '\n';
-    zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
+    zpl += '^FB' + Math.round(position.width) + ',' + this.maxLines + ',' + this.spaceBetweenLines + ',10,' + horizontalAlignment + ',0\n';
     zpl += '^FD' + this.text + '^FS\n';
 
     if (this.invert) {
