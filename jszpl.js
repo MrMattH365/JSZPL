@@ -1227,7 +1227,7 @@ class Barcode extends BaseVisualElement {
         break;
 
       case BarcodeTypeName.QRCode:      
-        var magnification = Math.min(Math.floor(position.height / 25), 10);
+        var magnification = Math.min(Math.floor(position.height / 40), 10);
         zpl += '^BQN,2,' + magnification + ',Q,7';
         break;
 
