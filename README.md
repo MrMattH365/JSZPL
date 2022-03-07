@@ -196,6 +196,8 @@ var Rotation = {
 }
 ``` 
 
+Justification has the following definition:
+
 ```js
 var Justification = {
   Left : '0',
