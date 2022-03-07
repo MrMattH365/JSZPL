@@ -610,8 +610,16 @@ class Text extends BaseVisualElement {
         break;
     }
 
+    var initialLine;
+    if(this.orientation) {
+      initialLine = '^A' + this.fontFamily.value + this.orientation;
+    }else {
+      initialLine = '^A' + this.fontFamily.value;
+    }
+
+
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
-    zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',' + Math.round(position.height) + ',' + Math.round(position.width) + '\n';
+    zpl += initialLine + ',' + 'N' + ',' + Math.round(position.height) + ',' + Math.round(position.width) + '\n';
     zpl += '^FB' + Math.round(position.width) + ',' + this.maxLines + ',' + this.spaceBetweenLines + ',10,' + horizontalAlignment + ',0\n';
     zpl += '^FD' + this.text + '^FS\n';
 

@@ -24,8 +24,9 @@ var zpl = label.generateZPL();
 - [Installation](#installation)
 - Property Types
   - [Size](#size)
-  - [PrintQuantity](#printquantity)
   - [PrintDensity](#printdensity)
+  - [PrintQuantity](#printquantity)
+  - [Orientation](#orientation)
   - [FontFamily](#fontfamily)
   - [Alignment](#alignment)
   - [Spacing](#spacing)
@@ -92,6 +93,7 @@ label.quantity = new PrintQuantity(5,0,0,N);
 label.width = 100;
 label.height = 50;
 label.padding = new jszpl.Spacing(10);
+label.orientation = new jszpl.Orientation(jszpl.Rotation.Normal, jszpl.Justification.Left);
 
 var text = new jszpl.Text();
 label.content.push(text);
@@ -100,6 +102,7 @@ text.text = 'Hello World!';
 
 var zpl = label.generateZPL();
 //^XA
+//^FWN,0
 //^PQ5,0,0,N
 //^FO10,10^AD,N,,
 //^FB780,1,0,L,0
@@ -176,6 +179,36 @@ Usage example:
 ```js
 var label = new Label();
 label.printQuantity = new PrintQuantity(5,0,0,N);
+```
+
+#### Orientation
+
+Orientation allows you to rotate the label and force justification at the time of printing.
+
+Rotation has the following definition:
+
+```js
+var Rotation = {
+  Normal : 'N',
+  Right : 'R',
+  Bottom : 'I',
+  Left : 'B'
+}
+``` 
+
+```js
+var Justification = {
+  Left : '0',
+  Right : '1',
+  Auto : '2'
+}
+``` 
+
+Usage example:
+
+```js
+var label = new Label();
+label.orientation = new jszpl.Orientation(jszpl.Rotation.Normal, jszpl.Justification.Left);
 ```
 
 #### FontFamily
@@ -430,6 +463,7 @@ Label is the base container element within which other elements can be placed.
 | height | Number | Sets the height of the label based on printDensity.value |
 | padding | [Spacing](#spacing) | Sets the padding of the label element, makes child elements consume less space |
 | content | Array | Child elements |
+| orientation | [Orientation](#orientation) | Default Rotation and Justification of the label contents.
 
 Usage example:
 
@@ -442,6 +476,7 @@ label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 label.width = 100;
 label.height = 50;
 label.padding = new Spacing(10);
+label.orientation = new Orientation(jszpl.Rotation.Normal, jszpl.Justification.Left);
 
 var text = new Text();
 label.content.push(text);
@@ -450,6 +485,7 @@ text.text = 'Hello World!';
 
 var zpl = label.generateZPL();
 //^XA
+//^FWN,0
 //^FO10,10^AD,N,,
 //^FB780,1,0,L,0
 //^FDHello World!^FS
@@ -480,6 +516,7 @@ Text displays characters on the label.
 | text | String | Sets the text of the element |
 | maxLines | Number | Sets the maximum number of lines in the text block |
 | spaceBetweenLines | Number | If text block word wraps, this defines the space between each line (in dots) |
+| orientation | String | Single character used to rotate the text display at print, if different from default.
 
 Usage example:
 
@@ -647,6 +684,7 @@ Displays a barcode.
 | type | [BarcodeType](#barcodetype) | Sets the barcode type to use |
 | data | String | Text to encode into barcode |
 | maxLength | Number | Additional parameter to use for sizing of 2D barcodes. Populate with expected maximum data length. |
+| orientation | String | Single character used to rotate the text display at print, if different from default. |
 
 #### Graphic
 
@@ -678,7 +716,6 @@ Example of image:
 | Invert | Not implemented correctly by all controls | 
 | Grid Columnspan | Pending implementation |
 | Grid Rowspan | Pending implementation |
-| Rotation | Pending implemented |
 | Fonts | Fonts A-F are implemented, G-V not implemeneted |
 | DataMatrix barcode | Sometimes not displayed, properties result in invalid sizing |
 | Text line breaks | Text element does not support line breaks |
