@@ -687,6 +687,7 @@ Displays a barcode.
 | data | String | Text to encode into barcode |
 | maxLength | Number | Additional parameter to use for sizing of 2D barcodes. Populate with expected maximum data length. |
 | orientation | String | Single character used to rotate the text display at print, if different from default. |
+| barcodeFieldDefaults | Object | Fields are width, ratio, height. None are required, but enable you to enlarge 2D barcodes. |
 
 #### Graphic
 
