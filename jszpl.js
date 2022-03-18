@@ -1178,9 +1178,11 @@ class Barcode extends BaseVisualElement {
     {
       zpl += "^FR";
     }
-    zpl += '^BY' + (this.barcodeFieldDefaults != null && this.barcodeFieldDefaults !== '' && this.barcodeFieldDefaults.width != null ? this.barcodeFieldDefaults.width : 2)
-           + ',' + (this.barcodeFieldDefaults != null && this.barcodeFieldDefaults !== '' && this.barcodeFieldDefaults.ratio != null ? this.barcodeFieldDefaults.ratio : 3) 
-           + ',' + (this.barcodeFieldDefaults != null && this.barcodeFieldDefaults !== '' && this.barcodeFieldDefaults.ratio != null ?this.barcodeFieldDefaults.ratio : 10);
+    if(this.barcodeFieldDefaults != null && this.barcodeFieldDefaults !== '') {
+      zpl += '^BY' + (this.barcodeFieldDefaults.width != null ? this.barcodeFieldDefaults.width : 2)
+           + ',' + (this.barcodeFieldDefaults.ratio != null ? this.barcodeFieldDefaults.ratio : 3) 
+           + ',' + (this.barcodeFieldDefaults.height != null ?this.barcodeFieldDefaults.height : 10);
+    }
     
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
